@@ -1,0 +1,53 @@
+Objective: Perform steps to secure apache using .htaccess and show how it can be used to give secure access to the website.
+Steps to Secure Your WebPage
+1. Update and upgrade your oprating system
+ $ sudo apt-get update
+ sudo apt-get upgrade
+2. Install Apache2:
+ $ sudo apt-get install apache2
+3. Start Apache Services:
+ $ sudo service apache2 start
+4. Now open:
+ Cd /var/www/html
+5. Create directory(web) inside in /var/www/html:
+ $ sudo /Mkdir web
+6. Now open the directory and add index.html file inside it.
+7. Save the file
+8. Restart the apache services:
+ $ sudo service apache2 restart
+9. Open web browser and run localhost
+ Localhost/web
+10. Installing the Apache Utilities Package
+ $ sudo apt-get install apache2-utils
+11. Configure Apache to Allow .htaccess Authentication:
+ $ sudo gedit /etc/apache2/apache2.conf
+12. And then in directory/www/var tag modify some lines shown below:
+ Options Indexes FollowSymLinks
+AllowOverride All
+Require all granted
+13. Save the file
+14. Create the password file
+ $ sudo htpasswd -c /etc/apache2/.htpasswd root
+15. Confirm the passwords
+ $ sudo cat /etc/apache2/.htpasswd
+16. Now grant the permission to www-data to read .htpasswd file
+ $ sudo chown www-data:www-data /etc/apache2/.htpasswd
+ $ sudo chmod 0660 /etc/apache2/.htpasswd
+17. Configure apache password authentication:
+ $ sudo gedit /var/www/html/.htaccess
+
+
+
+
+
+
+
+
+18. And type following text in it.
+ AuthType Basic
+AuthName "Restricted Content"
+AuthUserFile /etc/apache2/.htpasswd
+Require valid-user
+19. Now restart the apache2:
+ sudo /etc/init.d/apache2 restart
+20. Now when you open your localhost/web on web browser then the prompt will appear which ask for username and password shown in screenshot below:
